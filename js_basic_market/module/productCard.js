@@ -4,7 +4,10 @@ import {
 } from "../utils/dom.js";
 import { getCartToggleButton } from "./cartToggleButton.js";
 
-export const getProductCard = (productInfo) => {
+export const getProductCard = (
+  productInfo,
+  removeCartCallback
+) => {
   const {
     imgSrc,
     name,
@@ -28,7 +31,10 @@ export const getProductCard = (productInfo) => {
     alt: "파프리카 2입",
   });
 
-  const cartToggleBtn = getCartToggleButton(productInfo);
+  const cartToggleBtn = getCartToggleButton(
+    productInfo,
+    removeCartCallback
+  );
 
   appendChildrenList(productImageCon, [
     productImage,

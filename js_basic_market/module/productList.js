@@ -1,7 +1,10 @@
 import { makeDOMWithProperties } from "../utils/dom.js";
 import { getProductCard } from "./productCard.js";
 
-export const getProductList = (productInfoList) => {
+export const getProductList = (
+  productInfoList,
+  removeCartCallback
+) => {
   if (!productInfoList && !Array.isArray(productInfoList))
     return;
 
@@ -13,9 +16,12 @@ export const getProductList = (productInfoList) => {
   );
 
   productInfoList.forEach((productInfo) => {
-    const productCard = getProductCard({
-      ...productInfo,
-    });
+    const productCard = getProductCard(
+      {
+        ...productInfo,
+      },
+      removeCartCallback
+    );
     productListContainer.appendChild(productCard);
   });
 

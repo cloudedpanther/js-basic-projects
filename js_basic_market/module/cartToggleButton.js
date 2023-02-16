@@ -1,9 +1,11 @@
 import { makeDOMWithProperties } from "../utils/dom.js";
 import { CART_COOKIE_KEY } from "../constants/cart.js";
 
+export const getCartInfo = () =>
+  JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
+
 const isInCart = ({ id }) => {
-  const originalCartInfo =
-    JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
+  const originalCartInfo = getCartInfo();
 
   return !!originalCartInfo.find(
     (cartInfo) => cartInfo.id === id
@@ -11,8 +13,7 @@ const isInCart = ({ id }) => {
 };
 
 const addCartInfo = (productInfo) => {
-  const originalCartInfo =
-    JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
+  const originalCartInfo = getCartInfo();
 
   if (
     originalCartInfo.findIndex(
@@ -28,8 +29,7 @@ const addCartInfo = (productInfo) => {
 };
 
 const removeCartInfo = ({ id }) => {
-  const originalCartInfo =
-    JSON.parse(localStorage.getItem(CART_COOKIE_KEY)) || [];
+  const originalCartInfo = getCartInfo();
 
   const newCartInfo = originalCartInfo.filter(
     (cartInfo) => cartInfo.id !== id
@@ -41,7 +41,10 @@ const removeCartInfo = ({ id }) => {
   );
 };
 
-export const getCartToggleButton = (productInfo) => {
+export const getCartToggleButton = (
+  productInfo,
+  removeCartCallback
+) => {
   let inCart = isInCart(productInfo);
 
   const cartToggleBtn = makeDOMWithProperties("button", {
@@ -57,6 +60,7 @@ export const getCartToggleButton = (productInfo) => {
           return;
         removeCartInfo(productInfo);
         cartImage.src = "public/assets/cart.png";
+        removeCartCallback?.();
       } else {
         addCartInfo(productInfo);
         cartImage.src = "public/assets/cartDisabled.png";
