@@ -1,16 +1,20 @@
-import { getProductCard } from "./module/productCard.js";
+import { fetchSectionListData } from "./module/fetch.js";
+import {
+  setButtonEvent,
+  setFilterEvent,
+} from "./module/productFilter.js";
+import { getProductList } from "./module/productList.js";
 
-const sectionDOM = document.querySelector(
-  ".product-list-section"
+const sectionInfoList = await fetchSectionListData();
+
+const productList = sectionInfoList.reduce(
+  (acc, cur) => [...acc, ...cur.productList],
+  []
 );
 
-const productCard = getProductCard({
-  id: 1,
-  imgSrc: "/js_basic_market/public/assets/파프리카.jpg",
-  name: "파프리카 2입",
-  discountPercent: 20,
-  price: 2000,
-  originalPrice: 2500,
-});
+const sectionDOM = document.querySelector("section");
+const productListDOM = getProductList(productList);
+sectionDOM.appendChild(productListDOM);
 
-sectionDOM.appendChild(productCard);
+setFilterEvent();
+setButtonEvent(productList);
