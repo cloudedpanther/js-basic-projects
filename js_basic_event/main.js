@@ -2,7 +2,7 @@ import { countUp } from "./utils/countUp.js";
 import {
   setSelectCards,
   setSelectButton,
-  // setResultContainer,
+  setResultContainer,
 } from "./module/selectCard.js";
 // import { setMbtiSection } from "./module/mbtiSelect.js";
 import { setTabMenu } from "./module/tabMenu.js";
@@ -22,7 +22,7 @@ setTabMenu();
 setSelectCards();
 setSelectButton();
 
-// setResultContainer();
+setResultContainer();
 
 // setMbtiSection();
 

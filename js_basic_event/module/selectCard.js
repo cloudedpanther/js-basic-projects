@@ -37,6 +37,15 @@ const snackCardList = document.querySelector(
 const selectButtonDOM = document.querySelector(
   ".participate-button"
 );
+const [notYetContainerDOM, resultContainerDOM] =
+  document.querySelectorAll(".result-container");
+const [
+  ,
+  resultImageDOM,
+  resultNameDOM,
+  resultDescriptionDOM,
+  selectRetryButtonDOM,
+] = resultContainerDOM.children;
 
 const getSelectedCard = () => {
   return snackCardList.querySelector(".select");
@@ -97,6 +106,11 @@ const getSelectCardDOM = ({
 };
 
 export const setSelectCards = () => {
+  const originalSnackCards = [...snackCardList.children];
+  originalSnackCards.forEach((snackCard) =>
+    snackCard.remove()
+  );
+
   cardInfoList.forEach((cardInfo) => {
     const selectCardDOM = getSelectCardDOM(cardInfo);
     snackCardList.appendChild(selectCardDOM);
@@ -118,5 +132,50 @@ export const setSelectButton = () => {
 
     const cardId = selectedCard.id?.split("-")[1];
     localStorage.setItem(SELECT_RESULT_KEY, cardId);
+    setResultContainer();
   };
+};
+
+const initialize = () => {
+  localStorage.removeItem(SELECT_RESULT_KEY);
+
+  setSelectCards();
+  setResultContainer();
+
+  const selectSectionDOM = document.getElementById(
+    "participate-section"
+  );
+  const scrollTargetY = selectSectionDOM.offsetTop;
+  window.scroll({
+    top: scrollTargetY,
+    left: 0,
+    behavior: "smooth",
+  });
+};
+
+export const setResultContainer = () => {
+  const selectedId = Number(
+    localStorage.getItem(SELECT_RESULT_KEY)
+  );
+
+  const isSelected = !!selectedId;
+  if (!isSelected) {
+    notYetContainerDOM.style.display = "block";
+    resultContainerDOM.style.display = "none";
+    return;
+  }
+
+  notYetContainerDOM.style.display = "none";
+  resultContainerDOM.style.display = "flex";
+
+  const { imgSrc, name, description } = cardInfoList.find(
+    (cardInfo) => cardInfo.id === selectedId
+  );
+
+  resultImageDOM.src = imgSrc;
+  resultImageDOM.alt = name;
+  resultNameDOM.innerHTML = name;
+  resultDescriptionDOM.innerHTML = description;
+
+  selectRetryButtonDOM.onclick = () => initialize();
 };
