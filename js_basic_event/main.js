@@ -1,16 +1,15 @@
 import { countUp } from "./utils/countUp.js";
-// import {
-//   setSelectCards,
-//   setSelectButton,
-//   setResultContainer,
-// } from "./module/selectCard.js";
+import {
+  setSelectCards,
+  setSelectButton,
+  // setResultContainer,
+} from "./module/selectCard.js";
 // import { setMbtiSection } from "./module/mbtiSelect.js";
 import { setTabMenu } from "./module/tabMenu.js";
 // import { setShareURLButton } from "./module/share.js";
 
 const data = {
   participate: 1341513412,
-  // participate: 200000,
 };
 
 const participateDOM = document.getElementById(
@@ -20,8 +19,8 @@ countUp(participateDOM, data.participate, 5);
 
 setTabMenu();
 
-// setSelectCards();
-// setSelectButton();
+setSelectCards();
+setSelectButton();
 
 // setResultContainer();
 
