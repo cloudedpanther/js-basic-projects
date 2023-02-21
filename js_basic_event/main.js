@@ -6,7 +6,7 @@ import {
 } from "./module/selectCard.js";
 import { setMbtiSection } from "./module/mbtiSelect.js";
 import { setTabMenu } from "./module/tabMenu.js";
-// import { setShareURLButton } from "./module/share.js";
+import { setShareURLButton } from "./module/share.js";
 
 const data = {
   participate: 1341513412,
@@ -26,4 +26,4 @@ setResultContainer();
 
 setMbtiSection();
 
-// setShareURLButton();
+setShareURLButton();
