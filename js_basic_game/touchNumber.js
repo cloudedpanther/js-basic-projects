@@ -76,7 +76,7 @@ const setButtonDOM = () => {
   }
 };
 
-const initializeTouchNumberGame = () => {
+const onTouchNumberGameEnd = () => {
   stopTimer();
   setTimer(0);
   currentNumber = 1;
@@ -89,8 +89,7 @@ const initialize = () => {
 
   retryButtonList.forEach((retryButton) => {
     retryButton.onclick = () => {
-      handleModalClose();
-      initializeTouchNumberGame(initializeTouchNumberGame);
+      handleModalClose(onTouchNumberGameEnd);
     };
   });
 };

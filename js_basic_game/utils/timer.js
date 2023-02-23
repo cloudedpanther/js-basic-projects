@@ -1,4 +1,4 @@
-const MAX_TIME = 7;
+const MAX_TIME = 10;
 
 const timerDOM = document.querySelector(".game-time");
 

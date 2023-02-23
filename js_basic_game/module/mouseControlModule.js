@@ -1,4 +1,4 @@
-import { makeDOMwithProperties } from "../utils/dom.js";
+import { makeDOMWithProperties } from "../utils/dom.js";
 import { handleModalOpen } from "../utils/modal.js";
 import {
   startTimer,
@@ -62,7 +62,7 @@ export const setBoxDOM = ({
   end,
   walls,
 }) => {
-  const controlBoxContainer = makeDOMwithProperties("div", {
+  const controlBoxContainer = makeDOMWithProperties("div", {
     id: "control-box-container",
     onmouseleave: () => {
       if (!isGameStart) return;
@@ -134,7 +134,7 @@ export const setBoxDOM = ({
         };
       })();
 
-      const boxDOM = makeDOMwithProperties("div", {
+      const boxDOM = makeDOMWithProperties("div", {
         id: `box-${i}-${j}`,
         className,
         innerHTML,
